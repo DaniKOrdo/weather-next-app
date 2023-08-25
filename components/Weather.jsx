@@ -41,7 +41,7 @@ export function Weather ({ data }) {
       <p className='text-9xl'>{Math.round(temp)}&#176;</p>
       <p className='uppercase'>{description}</p>
 
-      <secction className='flex  gap-12 bg-slate-200 p-5 rounded-full'>
+      <section className='flex  gap-12 bg-slate-200 p-5 rounded-full'>
         <div className='flex flex-col items-center'>
           <span>{Math.round(feels_like)}</span>
           <span className='text-xs'>Feels like</span>
@@ -54,7 +54,7 @@ export function Weather ({ data }) {
           <span>{Math.round(speed)}</span>
           <span className='text-xs'>Wind speed</span>
         </div>
-      </secction>
+      </section>
     </>
   )
 }
