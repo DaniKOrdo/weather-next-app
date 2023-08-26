@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react'
 // import Image from 'next/image'
 
-import { Weather } from '@/components/Weather'
+import { Weather } from '@/components/Current/Weather'
+import { WeatherChart } from '@/components/Current/WeatherChart'
 
 export default function Home () {
   const [city, setCity] = useState('palma')
@@ -11,17 +12,33 @@ export default function Home () {
   const [loading, setLoading] = useState(false)
 
   // https://openweathermap.org/current
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`
+  // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`
+
+  // https://rapidapi.com/weatherapi/api/weatherapi-com
+  const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3`
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPIDAPI_KEY,
+      'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+    }
+  }
 
   const fetchWeather = (e) => {
     if (e) e.preventDefault()
     setLoading(true)
-    fetch(url)
+    fetch(url, options)
       .then((res) => res.json())
       .then((data) => {
         setWeather(data)
-        setLoading(false)
       })
+      .catch((err) => {
+        console.error('ERROR -> ', err)
+      })
+
+    console.log(weather)
+    setLoading(false)
     setCity('')
   }
 
@@ -37,7 +54,6 @@ export default function Home () {
             className='text-2xl border rounded-full pl-5 p-2 text-black bg-transparent focus:outline-none placeholder-black'
             type='text'
             placeholder='City'
-            value={city}
             onChange={(e) => setCity(e.target.value)}
           />
           {/* <div className='flex mt-4'>
@@ -74,7 +90,8 @@ export default function Home () {
           </button> */}
         </form>
         {loading && <p className='text-2xl'>Loading...</p>}
-        {weather.main && <Weather data={weather} />}
+        {weather.current && <Weather data={weather} />}
+        {weather.forecast && <WeatherChart data={weather.forecast.forecastday[0].hour} />}
       </div>
     </main>
   )
