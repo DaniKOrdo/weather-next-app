@@ -15,7 +15,7 @@ export default function Home () {
   // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`
 
   // https://rapidapi.com/weatherapi/api/weatherapi-com
-  const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3`
+  const url = `https://weatherapi-com.p.rapidapi.com/forecast.json?q=${city}&days=3&alerts=yes`
 
   const options = {
     method: 'GET',
@@ -37,7 +37,6 @@ export default function Home () {
         console.error('ERROR -> ', err)
       })
 
-    console.log(weather)
     setLoading(false)
     setCity('')
   }
@@ -92,6 +91,7 @@ export default function Home () {
         {loading && <p className='text-2xl'>Loading...</p>}
         {weather.current && <Weather data={weather} />}
         {weather.forecast && <WeatherChart data={weather.forecast.forecastday[0].hour} />}
+        {weather.error && <p className='text-2xl'>{weather.error.message}</p>}
       </div>
     </main>
   )
