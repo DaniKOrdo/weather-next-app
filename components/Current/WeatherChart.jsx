@@ -35,35 +35,31 @@ export function WeatherChart ({ data }) {
     })
   }, [data])
 
-  console.log(dataHours)
+  const isCurrentHour = (context) => {
+    const currentHour = new Date().getHours().toString().padStart(2, '0')
+    const currentTimeIndex = LABELS.indexOf(currentHour + ':00')
+    return context.dataIndex === currentTimeIndex
+  }
 
   const data2 = {
     labels: LABELS,
     datasets: [
       {
         label: 'Temperature',
-        backgroundColor: '#EAC435',
-        borderColor: 'rgba(234, 196, 53,0.5)',
-        data: dataHours
+        // backgroundColor: '#6d28d9',
+        borderColor: '#6d28d9',
+        data: dataHours,
+        tension: 0.4,
+        pointBackgroundColor: (context) => (isCurrentHour(context) ? '#a78bfa' : '#6d28d9'),
+        pointRadius: (context) => (isCurrentHour(context) ? 6 : 3)
       }
     ]
   }
+
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    aspectRatio: 3,
-    scales: {
-      x: {
-        ticks: {
-          color: 'gray'
-        }
-      },
-      y: {
-        ticks: {
-          color: 'gray'
-        }
-      }
-    }
+    aspectRatio: 3
   }
 
   return (
