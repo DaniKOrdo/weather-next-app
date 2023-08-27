@@ -46,12 +46,11 @@ export function WeatherChart ({ data }) {
     datasets: [
       {
         label: 'Temperature',
-        // backgroundColor: '#6d28d9',
-        borderColor: '#6d28d9',
+        borderColor: '#4338ca',
         data: dataHours,
         tension: 0.4,
-        pointBackgroundColor: (context) => (isCurrentHour(context) ? '#a78bfa' : '#6d28d9'),
-        pointRadius: (context) => (isCurrentHour(context) ? 6 : 3)
+        pointBackgroundColor: (context) => (isCurrentHour(context) ? '#818cf8' : '#4338ca'),
+        pointRadius: (context) => (isCurrentHour(context) ? 6 : 2)
       }
     ]
   }
