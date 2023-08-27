@@ -27,12 +27,8 @@ export function WeatherChart ({ data }) {
   const [dataHours, setDataHours] = useState([])
 
   useEffect(() => {
-    data.map((hour) => {
-      setDataHours((prev) => [
-        ...prev,
-        hour.temp_c]
-      )
-    })
+    const tempData = data.map((hour) => hour.temp_c)
+    setDataHours(tempData)
   }, [data])
 
   const isCurrentHour = (context) => {
@@ -58,7 +54,20 @@ export function WeatherChart ({ data }) {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    aspectRatio: 3
+    aspectRatio: 3,
+    plugins: {
+      legend: { display: false }
+    },
+    scales: {
+      x: {
+        grid: { color: '#e7eff5' },
+        ticks: { color: '#e7eff5' }
+      },
+      y: {
+        grid: { color: '#e7eff5' },
+        ticks: { color: '#e7eff5' }
+      }
+    }
   }
 
   return (
