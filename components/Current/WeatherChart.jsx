@@ -45,7 +45,7 @@ export function WeatherChart ({ data }) {
         borderColor: '#4338ca',
         data: dataHours,
         tension: 0.4,
-        pointBackgroundColor: (context) => (isCurrentHour(context) ? '#818cf8' : '#4338ca'),
+        pointBackgroundColor: (context) => (isCurrentHour(context) ? '#4338ca' : '#4338ca'),
         pointRadius: (context) => (isCurrentHour(context) ? 6 : 2)
       }
     ]

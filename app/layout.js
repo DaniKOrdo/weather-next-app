@@ -1,5 +1,5 @@
 import './globals.css'
-import { overpass, rubik } from '@/components/font.js'
+import { rubik } from '@/components/font.js'
 
 export const metadata = {
   title: 'Weather Next App',
