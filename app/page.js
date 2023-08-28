@@ -1,12 +1,13 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import { Weather } from '@/components/Current/Weather'
 import { WeatherChart } from '@/components/Current/WeatherChart'
 import searchIcon from '@/components/icons/searchIcon.svg'
+import sadCloud from '@/components/icons/sadCloud.svg'
 
 export default function Home () {
-  const [city, setCity] = useState('palma')
+  const [city, setCity] = useState('')
   const [weather, setWeather] = useState({})
   // const [units, setUnits] = useState('metric')
   const [loading, setLoading] = useState(false)
@@ -23,7 +24,7 @@ export default function Home () {
   }
 
   const fetchWeather = (e) => {
-    if (e) e.preventDefault()
+    if (!city.trim()) return
     setLoading(true)
 
     fetch(url, options)
@@ -40,20 +41,22 @@ export default function Home () {
       })
   }
 
-  useEffect(() => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     fetchWeather()
-  }, [])
+  }
 
   return (
     <main className='flex min-h-screen flex-col items-center md:p-24 p-8 text-indigo-800 lg:max-w-6xl lg:mx-auto'>
       <div className='card flex flex-col items-center w-full p-2'>
-        <form className='flex items-center p-2 w-full md:w-auto'>
+        <form className='flex items-center p-2 w-full md:w-auto' onSubmit={handleSubmit}>
           <div className='relative w-full'>
             <input
-              className='w-full md:text-2xl text border rounded-full pl-4 p-2 text-indigo-800 bg-transparent focus:outline-none placeholder-indigo-800'
+              className='w-full md:text-xl text border rounded-full pl-4 p-2 text-indigo-800 bg-transparent focus:outline-none placeholder-indigo-800 placeholder-opacity-80'
               type='text'
               placeholder='City'
               onChange={(e) => setCity(e.target.value)}
+              autoFocus
             />
             <Image
               priority
@@ -66,10 +69,23 @@ export default function Home () {
             />
           </div>
         </form>
-        {loading && <p className='text-2xl'>Loading...</p>}
+        {!weather.current && loading && <p className='text-2xl'>Loading...</p>}
         {weather.current && <Weather data={weather} />}
         {weather.forecast && <WeatherChart data={weather.forecast.forecastday[0].hour} />}
-        {weather.error && <p className='text-2xl'>{weather.error.message}</p>}
+        {weather.error &&
+          <>
+            <Image
+              priority
+              src={sadCloud}
+              height={256}
+              width={256}
+              alt='sad cloud'
+              onClick={fetchWeather}
+            />
+            <p className='text-2xl'>
+              {weather.error.message}
+            </p>
+          </>}
       </div>
     </main>
   )
