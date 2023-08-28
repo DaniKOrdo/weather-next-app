@@ -13,6 +13,6 @@ export const anton = Anton({
 })
 
 export const rubik = Rubik({
-  weight: ['400', '700'],
+  weight: ['400', '500', '700'],
   subsets: ['latin']
 })
