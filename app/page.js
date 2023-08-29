@@ -8,7 +8,7 @@ import sadCloud from '@/components/icons/sadCloud.svg'
 
 export default function Home () {
   const [city, setCity] = useState('')
-  const [weather, setWeather] = useState({})
+  const [data, setData] = useState({})
   // const [units, setUnits] = useState('metric')
   const [loading, setLoading] = useState(false)
 
@@ -23,14 +23,15 @@ export default function Home () {
     }
   }
 
-  const fetchWeather = (e) => {
+  const fetchWeather = () => {
     if (!city.trim()) return
     setLoading(true)
 
     fetch(url, options)
       .then((res) => res.json())
       .then((data) => {
-        setWeather(data)
+        setData(data)
+        console.log(data)
       })
       .catch((err) => {
         console.error('ERROR -> ', err)
@@ -64,16 +65,16 @@ export default function Home () {
               height={32}
               width={32}
               alt='search icon'
-              className='absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer '
+              className='absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer'
               onClick={fetchWeather}
             />
           </div>
         </form>
-        {!weather.current && loading && <p className='text-2xl'>Loading...</p>}
-        {weather.current && <Weather data={weather} />}
-        {weather.forecast && <WeatherChart data={weather.forecast.forecastday[0].hour} />}
-        {weather.error &&
-          <>
+        {!data.current && loading && <p className='text-2xl'>Loading...</p>}
+        {data.current && <Weather data={data} />}
+        {data.forecast && <WeatherChart data={data.forecast.forecastday[0].hour} localTime={data.location.localtime} />}
+        {data.error &&
+          <section className='flex flex-col items-center'>
             <Image
               priority
               src={sadCloud}
@@ -83,9 +84,9 @@ export default function Home () {
               onClick={fetchWeather}
             />
             <p className='text-2xl'>
-              {weather.error.message}
+              {data.error.message}
             </p>
-          </>}
+          </section>}
       </div>
     </main>
   )
