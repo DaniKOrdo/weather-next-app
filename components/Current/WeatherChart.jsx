@@ -23,7 +23,7 @@ ChartJS.register(
   Legend
 )
 
-export function WeatherChart ({ data }) {
+export function WeatherChart ({ data, localTime }) {
   const [dataHours, setDataHours] = useState([])
 
   useEffect(() => {
@@ -31,10 +31,10 @@ export function WeatherChart ({ data }) {
     setDataHours(tempData)
   }, [data])
 
-  const isCurrentHour = (context) => {
-    const currentHour = new Date().getHours().toString().padStart(2, '0')
-    const currentTimeIndex = LABELS.indexOf(currentHour + ':00')
-    return context.dataIndex === currentTimeIndex
+  const isLocalHour = (context) => {
+    const LocalHour = localTime.split(' ')[1].split(':')[0].padStart(2, '0')
+    const localHourIndex = LABELS.indexOf(LocalHour + ':00')
+    return context.dataIndex === localHourIndex
   }
 
   const data2 = {
@@ -45,8 +45,8 @@ export function WeatherChart ({ data }) {
         borderColor: '#4338ca',
         data: dataHours,
         tension: 0.4,
-        pointBackgroundColor: (context) => (isCurrentHour(context) ? '#4338ca' : '#4338ca'),
-        pointRadius: (context) => (isCurrentHour(context) ? 6 : 2)
+        pointBackgroundColor: (context) => (isLocalHour(context) ? '#4338ca' : '#4338ca'),
+        pointRadius: (context) => (isLocalHour(context) ? 6 : 2)
       }
     ]
   }
