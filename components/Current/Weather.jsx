@@ -47,7 +47,7 @@ export function Weather ({ data }) {
 
   return (
     <>
-      <p className='flex gap-1'>
+      <p className='flex justify-center items-center gap-1 text-balance w-11/12'>
         <Image
           src={pointerMapIcon}
           height={16}
