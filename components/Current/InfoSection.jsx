@@ -11,7 +11,7 @@ export function InfoSection ({ data }) {
   } = data.current
 
   return (
-    <section className='flex md:gap-12 gap-4 bg-indigo-50 p-4 px-8 m-4 rounded-full text-center'>
+    <section className='flex w-11/12 md:w-auto items-center justify-center md:gap-12 gap-8 bg-indigo-50 p-4 px-8 my-4 rounded-full text-center'>
       <div className='flex flex-col items-center'>
         <Image
           src={thermometerIcon}
