@@ -42,13 +42,6 @@ export default function Home () {
     fetchWeather(city)
   }
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      fetchWeather(city)
-    }
-  }
-
   const handleGeolocation = () => {
     navigator.geolocation.getCurrentPosition(
       function (position) {
@@ -77,10 +70,9 @@ export default function Home () {
     <main className='flex min-h-screen flex-col items-center md:p-24 p-8 text-indigo-800 lg:max-w-6xl lg:mx-auto'>
       <div className='card flex flex-col items-center w-full p-2'>
         <InputForm
-          city={city}
           setCity={setCity}
           handleSearch={handleSearch}
-          handleKeyDown={handleKeyDown}
+          fetchWeather={fetchWeather}
         />
         <WeatherDisplay
           data={data}
