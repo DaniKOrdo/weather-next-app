@@ -8,7 +8,7 @@ export default function WeatherDisplay ({ data, loading, noDataAvailable }) {
     <>
       {!data.current && loading && <p className='text-2xl'>Loading...</p>}
       {data.current && <Weather data={data} />}
-      {noDataAvailable && !loading && (
+      {!data.error && noDataAvailable && !loading && (
         <p className='text-2xl'>No forecast data available.</p>
       )}
       {data.forecast && data.forecast.forecastday.length > 0 && (
