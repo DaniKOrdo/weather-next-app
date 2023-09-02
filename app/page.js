@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import InputForm from '@/components/InputForm'
 import WeatherDisplay from '@/components/WeatherDisplay'
+import Footer from '@/components/Footer'
 
 export default function Home () {
   const cities = ['Mallorca', 'Japan', 'London', 'Buenos Aires']
@@ -26,6 +27,7 @@ export default function Home () {
     fetch(url, options)
       .then((res) => res.json())
       .then((data) => {
+        console.log('DATA -> ', data)
         setData(data)
         setNoDataAvailable(!data.forecast || data.forecast.forecastday.length === 0)
       })
@@ -67,19 +69,24 @@ export default function Home () {
   }, [])
 
   return (
-    <main className='flex min-h-screen flex-col items-center md:p-24 p-8 text-indigo-800 lg:max-w-6xl lg:mx-auto'>
-      <div className='card flex flex-col items-center w-full p-2'>
-        <InputForm
-          setCity={setCity}
-          handleSearch={handleSearch}
-          fetchWeather={fetchWeather}
-        />
-        <WeatherDisplay
-          data={data}
-          loading={loading}
-          noDataAvailable={noDataAvailable}
-        />
+    <>
+      <div className='flex min-h-screen flex-col items-center md:p-24 p-6 text-indigo-800 lg:max-w-6xl lg:mx-auto'>
+        <main className='card flex flex-col items-center w-full p-2'>
+          <InputForm
+            setCity={setCity}
+            handleSearch={handleSearch}
+            fetchWeather={fetchWeather}
+          />
+          <WeatherDisplay
+            data={data}
+            loading={loading}
+            noDataAvailable={noDataAvailable}
+          />
+        </main>
       </div>
-    </main>
+      {data && (
+        <Footer data={data} />
+      )}
+    </>
   )
 }
