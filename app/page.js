@@ -69,24 +69,22 @@ export default function Home () {
   }, [])
 
   return (
-    <>
-      <div className='flex min-h-screen flex-col items-center md:p-24 p-6 text-indigo-800 lg:max-w-6xl lg:mx-auto'>
-        <main className='card flex flex-col items-center w-full p-2'>
-          <InputForm
-            setCity={setCity}
-            handleSearch={handleSearch}
-            fetchWeather={fetchWeather}
-          />
-          <WeatherDisplay
-            data={data}
-            loading={loading}
-            noDataAvailable={noDataAvailable}
-          />
-        </main>
-      </div>
-      {data && (
+    <div className='flex min-h-screen flex-col items-center md:p-24 p-6 text-indigo-800 lg:max-w-6xl lg:mx-auto'>
+      <main className='card flex flex-col items-center w-full p-2 rounded-2xl mb-4'>
+        <InputForm
+          setCity={setCity}
+          handleSearch={handleSearch}
+          fetchWeather={fetchWeather}
+        />
+        <WeatherDisplay
+          data={data}
+          loading={loading}
+          noDataAvailable={noDataAvailable}
+        />
+      </main>
+      {data.location && (
         <Footer data={data} />
       )}
-    </>
+    </div>
   )
 }
