@@ -27,7 +27,6 @@ export function Weather ({ data }) {
 
         const response = await fetch(`https://api.unsplash.com/search/photos?page=1&query=${name}-${country}&${query}&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_KEY}`)
         const data = await response.json()
-        console.log(data)
 
         if (data.results && data.results.length > 0) {
           const randomIndex = Math.floor(Math.random() * data.results.length)
@@ -42,8 +41,6 @@ export function Weather ({ data }) {
 
     fetchImage()
   }, [name, country])
-
-  console.log(data)
 
   return (
     <>

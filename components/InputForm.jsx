@@ -13,7 +13,6 @@ export default function InputForm ({ setCity, handleSearch, fetchWeather }) {
           value={input}
           onChange={setInput}
           onSelect={(selectedCity) => {
-            console.log(selectedCity)
             setCity(selectedCity)
             fetchWeather(selectedCity)
           }}

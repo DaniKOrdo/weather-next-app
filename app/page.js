@@ -27,7 +27,6 @@ export default function Home () {
     fetch(url, options)
       .then((res) => res.json())
       .then((data) => {
-        console.log('DATA -> ', data)
         setData(data)
         setNoDataAvailable(!data.forecast || data.forecast.forecastday.length === 0)
       })
