@@ -6,8 +6,15 @@ body {
   background-color: #111927;
   background-position: center;
   background-image:
-      radial-gradient(at 47% 33%, hsl(204, 100%, 86%) 0, transparent 59%),
-      radial-gradient(at 82% 65%, hsl(261, 100%, 74%) 0, transparent 55%);
+    radial-gradient(at 47% 33%, #b8e2ff 0, transparent 59%),
+    radial-gradient(at 82% 65%, #a97aff 0, transparent 55%);
+  -webkit-transition: background-image 0.6s ease-out;
+  transition: background-image 0.6s ease-out;
+}
+
+::selection {
+  background-color: #6366f1;
+  color: #fff;
 }
 
 .card {
