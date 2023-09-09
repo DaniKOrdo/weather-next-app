@@ -1,5 +1,6 @@
-import './globals.css'
+import { Analytics } from '@vercel/analytics/react'
 import { rubik } from '@/components/font.js'
+import './globals.css'
 
 export const metadata = {
   title: 'Weather Next App',
@@ -13,7 +14,10 @@ export default function RootLayout ({ children }) {
         async
         src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_KEY}&language=en&components=locality&libraries=places&callback=myCallbackFunc`}
       />
-      <body className={rubik.className}>{children}</body>
+      <body className={rubik.className}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }
