@@ -1,27 +1,7 @@
 import { useEffect, useState } from 'react'
 import { LABELS } from '../Const.js'
 import { Line } from 'react-chartjs-2'
-
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js'
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-)
+import Chart from 'chart.js/auto'
 
 export function WeatherChart ({ data, localTime }) {
   const [dataHours, setDataHours] = useState([])
