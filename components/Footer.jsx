@@ -15,15 +15,18 @@ export default function Footer ({ data }) {
 
         const response = await fetch(`https://api.unsplash.com/search/photos?page=1&query=${name}-${country}&${query}&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_KEY}`)
         const data = await response.json()
-        console.log(data)
 
         if (data.results && data.results.length > 0) {
           const randomIndex = Math.floor(Math.random() * data.results.length)
           const imageUrl = data.results[randomIndex].urls.regular
           setUser(data.results[randomIndex].user.name)
           setUrlImg(data.results[randomIndex].links.html)
-          document.body.style.backgroundImage = `url(${imageUrl})`
-          document.body.style.backgroundSize = 'cover'
+          const img = new Image()
+          img.onload = () => {
+            document.body.style.backgroundImage = `url(${imageUrl})`
+            document.body.style.backgroundSize = 'cover'
+          }
+          img.src = imageUrl
         }
       } catch (error) {
         console.error('Error fetching image:', error)
