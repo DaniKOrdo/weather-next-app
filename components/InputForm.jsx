@@ -37,7 +37,7 @@ export default function InputForm ({ setCity, handleSearch, fetchWeather }) {
                     padding: '0.5rem'
                   }
                   return (
-                    <div key={suggestion.placeId} className='rounded-b-lg' {...getSuggestionItemProps(suggestion, { style })}>
+                    <div key={suggestion.placeId} className='rounded-b-lg' style={style} {...getSuggestionItemProps(suggestion)}>
                       {suggestion.description}
                     </div>
                   )
