@@ -1,7 +1,7 @@
 import { Analytics } from '@vercel/analytics/react'
 import { rubik } from '@/components/font.js'
 import './globals.css'
-import './Head.jsx'
+import Head from './Head'
 
 export const metadata = {
   title: 'Weather Next App',
