@@ -1,6 +1,14 @@
 export default function Head () {
   return (
     <head>
+      <meta name='title' content='Weather Next App' />
+      <meta name='description' content='Weather App' />
+      <meta name='keywords' content='weather, weather app, danik, danikdev' />
+      <meta name='robots' content='index, follow' />
+      <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+      <meta name='language' content='English' />
+      <meta name='author' content='danik.dev' />
+
       <meta property='og:url' content='https://weather-next-app.danik.dev' />
       <meta property='og:type' content='website' />
       <meta property='og:title' content='Weather Next App' />
